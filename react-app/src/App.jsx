@@ -1,5 +1,4 @@
 import {  } from 'antd/es/theme/internal';
-import './App.css'
 import { Layout } from 'antd';
 import AppHeader from './components/Layout/AppHeader';
 import AppSider from './components/Layout/AppSider';
