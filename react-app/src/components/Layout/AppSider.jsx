@@ -1,8 +1,8 @@
-import { Layout, Card, Statistic, Typography, List, Spin } from "antd";
-import { useState, useEffect } from "react";
-import { fakeFetchCrypto, fetchAssets } from "../../api";
+import { Layout, Card, Statistic, Typography, List, Tag } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-import { persentDifference } from "../../util";
+import { capitalize } from "../../util";
+import { useContext } from "react";
+import CryptoContext from "../../context/crypto-context";
 
 const siderStyle = {
   padding: "1rem",
@@ -12,45 +12,14 @@ const statisticStyle = {
 };
 
 export default function AppSider() {
-  const [loading, setLoading] = useState(false);
-  const [crypto, setCrypto] = useState([]);
-  const [assets, setAssets] = useState([]);
-
-  useEffect(() => {
-    async function preload() {
-      setLoading(true);
-      const { result } = await fakeFetchCrypto();
-      const assets = await fetchAssets();
-
-      setAssets(
-        assets.map((asset) => {
-          const coin = result.find((c) => c.id === asset.id);
-          return {
-            grow: asset.price < coin.price,
-            growPersent: persentDifference(asset.price, coin.price),
-            totalAmount: asset.amount * coin.price,
-            totalProfit: asset.amount * coin.price - asset.amount * asset.price,
-            ...asset,
-          };
-        })
-      );
-
-      setCrypto(result);
-      setLoading(false);
-    }
-    preload();
-  }, []);
-
-  if (loading) {
-    return <Spin fullscreen />;
-  }
+  const { assets } = useContext(CryptoContext);
 
   return (
     <Layout.Sider width="25%" style={siderStyle}>
       {assets.map((asset) => (
         <Card key={asset.id} style={statisticStyle}>
           <Statistic
-            title={asset.id}
+            title={capitalize(asset.id)}
             value={asset.totalAmount}
             precision={2}
             valueStyle={{
@@ -63,14 +32,30 @@ export default function AppSider() {
             size="small"
             style={statisticStyle}
             dataSource={[
-              { title: "Total Profit", value: asset.totalProfit },
-              { title: "Asset Amout", value: asset.amount },
-              { title: "Difference", value: asset.growPersent },
+              {
+                title: "Total Profit",
+                value: asset.totalProfit,
+                withTag: true,
+              },
+              { title: "Asset Amout", value: asset.amount, isPlaine: true },
             ]}
             renderItem={(item) => (
-              <List.Item>
+              <List.Item
+                style={{ display: "flex", justifyContent: "space-between" }}>
                 <span>{item.title}</span>
-                <span>{item.value}</span>
+                <span>
+                  {item.withTag && (
+                    <Tag color={asset.grow ? "green" : "red"}>
+                      {asset.growPersent}%
+                    </Tag>
+                  )}
+                  {item.isPlaine && item.value}
+                  {!item.isPlaine && (
+                    <Typography.Text type={asset.grow ? "success" : "danger"}>
+                      {Number(item.value).toFixed(2)}$
+                    </Typography.Text>
+                  )}
+                </span>
               </List.Item>
             )}
           />
