@@ -70,8 +70,9 @@ export default function AppHeader() {
         width={600}
         onClose={() => setDrawer(false)}
         open={drawer}
+        destroyOnClose
       >
-        <AddAssetForm />
+        <AddAssetForm onClose={() => setDrawer(false)} />
       </Drawer>
 
       <Modal open={modal} onCancel={() => setModal(false)} footer={null}>
