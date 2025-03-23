@@ -15,13 +15,13 @@ export default function CoinInfoModal({ coin }) {
       <Typography.Paragraph>
         <Typography.Text strong>1 day: </Typography.Text>
         <Tag color={coin.priceChange1d > 0 ? "green" : "red"}>
-          {coin.priceChange1h}%
+          {coin.priceChange1d}%
         </Tag>
       </Typography.Paragraph>
       <Typography.Paragraph>
         <Typography.Text strong>1 week: </Typography.Text>
         <Tag color={coin.priceChange1w > 0 ? "green" : "red"}>
-          {coin.priceChange1h}%
+          {coin.priceChange1w}%
         </Tag>
       </Typography.Paragraph>
       <Typography.Paragraph>

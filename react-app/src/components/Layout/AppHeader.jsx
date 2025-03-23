@@ -66,18 +66,17 @@ export default function AppHeader() {
         Add Asset
       </Button>
 
+      <Modal open={modal} onCancel={() => setModal(false)} footer={null}>
+        <CoinInfoModal coin={coin} />
+      </Modal>
+
       <Drawer
         width={600}
         onClose={() => setDrawer(false)}
         open={drawer}
-        destroyOnClose
-      >
+        destroyOnClose>
         <AddAssetForm onClose={() => setDrawer(false)} />
       </Drawer>
-
-      <Modal open={modal} onCancel={() => setModal(false)} footer={null}>
-        <CoinInfoModal coin={coin} />
-      </Modal>
     </Layout.Header>
   );
 }

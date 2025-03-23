@@ -1,9 +1,8 @@
 import { Layout, Card, Statistic, Typography, List, Tag } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
-import { capitalize } from "../../util";
+import { capitalize } from "../../utils";
 import { useContext } from "react";
 import CryptoContext from "../../context/crypto-context";
-
 const siderStyle = {
   padding: "1rem",
 };
@@ -46,13 +45,13 @@ export default function AppSider() {
                 <span>
                   {item.withTag && (
                     <Tag color={asset.grow ? "green" : "red"}>
-                      {asset.growPersent}%
+                      {asset.growPercent}%
                     </Tag>
                   )}
                   {item.isPlaine && item.value}
                   {!item.isPlaine && (
                     <Typography.Text type={asset.grow ? "success" : "danger"}>
-                      {Number(item.value).toFixed(2)}$
+                      {item.value.toFixed(2)}$
                     </Typography.Text>
                   )}
                 </span>

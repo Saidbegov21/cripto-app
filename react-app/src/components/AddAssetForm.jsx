@@ -82,7 +82,7 @@ export default function AddAssetForm({ onClose }) {
   function handelAmountChange(value) {
     const price = form.getFieldValue("price");
     form.setFieldsValue({
-      total: +(value * price).toFixed(2),
+      total: (value * price).toFixed(2),
     });
   }
 
@@ -110,8 +110,7 @@ export default function AddAssetForm({ onClose }) {
         price: coin.price.toFixed(2),
       }}
       onFinish={onFinish}
-      validatemesseges={validateMesseges}
-    >
+      validatemesseges={validateMesseges}>
       <CoinInfo coin={coin} />
       <Divider />
       <Form.Item
@@ -123,8 +122,7 @@ export default function AddAssetForm({ onClose }) {
             type: "number",
             min: 0,
           },
-        ]}
-      >
+        ]}>
         <InputNumber
           placeholder="Enter coin amount"
           onChange={handelAmountChange}
@@ -133,7 +131,11 @@ export default function AddAssetForm({ onClose }) {
       </Form.Item>
 
       <Form.Item label="Price" name="price">
-        <InputNumber onChange={handelPriceChange} style={{ width: "100%" }} />
+        <InputNumber
+          disabled
+          onChange={handelPriceChange}
+          style={{ width: "100%" }}
+        />
       </Form.Item>
 
       <Form.Item label="Date & Time" name="data">
