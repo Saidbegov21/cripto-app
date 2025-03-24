@@ -67,12 +67,12 @@ export default function AddAssetForm({ onClose }) {
     );
   }
 
-  function onFinish(v) {
+  function onFinish(value) {
     const newAsset = {
       id: coin.id,
-      amount: v.amount,
-      price: v.price,
-      date: v.date?.$d ?? new Date(),
+      amount: value.amount,
+      price: value.price,
+      date: value.date?.$d ?? new Date(),
     };
     assetRef.current = newAsset;
     setSubmitted(true);
@@ -82,7 +82,7 @@ export default function AddAssetForm({ onClose }) {
   function handelAmountChange(value) {
     const price = form.getFieldValue("price");
     form.setFieldsValue({
-      total: (value * price).toFixed(2),
+      total: +(value * price).toFixed(2),
     });
   }
 
@@ -110,7 +110,7 @@ export default function AddAssetForm({ onClose }) {
         price: coin.price.toFixed(2),
       }}
       onFinish={onFinish}
-      validatemesseges={validateMesseges}>
+      validateMesseges={validateMesseges}>
       <CoinInfo coin={coin} />
       <Divider />
       <Form.Item
@@ -146,7 +146,7 @@ export default function AddAssetForm({ onClose }) {
         <InputNumber disabled style={{ width: "100%" }} />
       </Form.Item>
 
-      <Form.Item label={null}>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           Add Asset
         </Button>
