@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { fakeFetchCrypto, fetchAssets } from "../api";
+import { fakeFetchCrypto, fetchAssets } from "../api.js";
 import { percentDifference } from "../utils.js";
 
 const CryptoContext = createContext({
