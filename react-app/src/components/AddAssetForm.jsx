@@ -110,7 +110,8 @@ export default function AddAssetForm({ onClose }) {
         price: coin.price.toFixed(2),
       }}
       onFinish={onFinish}
-      validateMesseges={validateMesseges}>
+      validatemesseges={validateMesseges}
+    >
       <CoinInfo coin={coin} />
       <Divider />
       <Form.Item
@@ -122,7 +123,8 @@ export default function AddAssetForm({ onClose }) {
             type: "number",
             min: 0,
           },
-        ]}>
+        ]}
+      >
         <InputNumber
           placeholder="Enter coin amount"
           onChange={handelAmountChange}
