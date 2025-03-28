@@ -68,10 +68,11 @@ export default function AddAssetForm({ onClose }) {
   }
 
   function onFinish(value) {
+    console.log("value: " + value.price);
     const newAsset = {
       id: coin.id,
-      amount: value.amount,
-      price: value.price,
+      amount: Number(value.amount),
+      price: Number(value.price),
       date: value.date?.$d ?? new Date(),
     };
     assetRef.current = newAsset;

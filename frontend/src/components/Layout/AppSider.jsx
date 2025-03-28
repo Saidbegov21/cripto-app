@@ -1,7 +1,7 @@
 import { Layout, Card, Statistic, Typography, List, Tag } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import { capitalize } from "../../utils";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CryptoContext from "../../context/crypto-context";
 const siderStyle = {
   padding: "1rem",
@@ -36,11 +36,12 @@ export default function AppSider() {
                 value: asset.totalProfit,
                 withTag: true,
               },
-              { title: "Asset Amout", value: asset.amount, isPlaine: true },
+              { title: "Asset Amount", value: asset.amount, isPlaine: true },
             ]}
             renderItem={(item) => (
               <List.Item
-                style={{ display: "flex", justifyContent: "space-between" }}>
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
                 <span>{item.title}</span>
                 <span>
                   {item.withTag && (
